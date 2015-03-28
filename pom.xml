@@ -57,18 +57,6 @@
 			<artifactId>spring-boot-starter-jdbc</artifactId>
 		</dependency>
 
-		<!-- dependancy for spring boot ws -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-ws</artifactId>
-		</dependency>
-
-		<!-- dependancy for spring boot redis -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-redis</artifactId>
-		</dependency>
-
 		<!-- dependancy for spring boot test -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -76,34 +64,7 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- dependancy for spring boot mongo db -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-		</dependency>
-
-		<!-- dependancy for spring boot jersey -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jersey</artifactId>
-		</dependency>
-
-		<!-- dependancy for spring boot seesion redis -->
-		<dependency>
-			<groupId>org.springframework.session</groupId>
-			<artifactId>spring-session-data-redis</artifactId>
-			<version>1.0.0.RELEASE</version>
-		</dependency>
-
 		<!-- dependancy for spring web -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-core</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>com.googlecode.json-simple</groupId>
 			<artifactId>json-simple</artifactId>
@@ -143,6 +104,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 
 
 	</dependencies>

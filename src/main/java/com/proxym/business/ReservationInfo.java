@@ -2,50 +2,52 @@ package com.proxym.business;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.proxym.domain.Reservation;
 import com.proxym.domain.User;
+import com.proxym.serialiser.DateSerializer;
 
 public class ReservationInfo {
-	
+
 	/**
 	 * reference of the resource.
 	 */
 	private String reference ;
-	
+
 	/**
 	 * Date when the reservation starts.
 	 */
+	@JsonSerialize(using=DateSerializer.class)
 	private Date dateStart ;
-	
+
 	/**
 	 * Date when the reservation ends.
 	 */
+	@JsonSerialize(using=DateSerializer.class)
 	private Date dateEnd ;
-	
+
 	/**
 	 * Description of rservation's purpose.
 	 */
 	private String description;
-	
+
 	/**
 	 * The User who are  doing the reservation.
 	 */
-	
 	private String loginUser ;
-	
+
 	/**
 	 *  resources related to this reservation.
 	 */
-
 	private String referenceResource ;
 
 	/**
 	 * default constructor.
 	 */
 	public ReservationInfo() {
-		
+
 	}
-	
+
 	/**
 	 * Constructor using all foelds.
 	 * 
@@ -175,7 +177,7 @@ public class ReservationInfo {
 	public void setLoginUser(String  loginUser) {
 		this.loginUser = loginUser;
 	}
-	
+
 	/**
 	 * Returns the  resource related to this reservation.
 	 * 
@@ -195,7 +197,7 @@ public class ReservationInfo {
 	public void setReferenceResource(String referenceResource) {
 		this.referenceResource = referenceResource;
 	}
-	
+
 	/**
 	 * Create domain reservation object from business one.
 	 * 
@@ -211,7 +213,7 @@ public class ReservationInfo {
 		reservation.setReference(reference);
 		return reservation;
 	}
-	
-	
+
+
 
 }

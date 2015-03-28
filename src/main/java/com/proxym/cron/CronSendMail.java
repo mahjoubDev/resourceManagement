@@ -1,6 +1,5 @@
 package com.proxym.cron;
 
-import org.springframework.scheduling.quartz.QuartzJobBean;
 
 
 /**

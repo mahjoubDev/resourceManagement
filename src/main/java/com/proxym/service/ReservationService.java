@@ -1,5 +1,7 @@
 package com.proxym.service;
 
+import java.util.List;
+
 import com.proxym.business.ReservationInfo;
 import com.proxym.domain.Reservation;
 import com.proxym.exception.GestionResourceException;
@@ -18,24 +20,38 @@ public interface ReservationService {
 	 * add new reservation.
 	 * 
 	 * @param reservationInfo
-	 * @throws GestionResourceException
+	 * @throws GestionResourceException indicates there is a problem.
 	 */
 	public void addReservation (ReservationInfo reservationInfo) throws GestionResourceException;
 	
 	/**
 	 * update existing reservation.
 	 * 
-	 * @param reservationInfo
-	 * @throws GestionResourceException
+	 * @param reservationInfo carries all the new information for the
+	 *  updated reservation.
+	 *  
+	 * @param referenceReservation refrence of the target reservation.
+	 * @throws GestionResourceException indicates there is a problem.
 	 */
-	public void updateReservation (ReservationInfo reservationInfo) throws GestionResourceException;
+	public void updateReservation (String referenceReservation,ReservationInfo reservationInfo) throws GestionResourceException;
 	
 	/**
 	 * delete existing reservation.
 	 * 
-	 * @param reservationInfo
-	 * @throws GestionResourceException
+	 * @param referenceReservation reference of the target reservation.
+	 * 
+	 * @throws GestionResourceException indicates there is a problem.
 	 */
-	public void deleteReservation (ReservationInfo reservationInfo) throws GestionResourceException;
+	public void deleteReservation (String referenceReservation) throws GestionResourceException;
+	
+	/**
+	 * Gets all the reservations existing in the system.
+	 * 
+	 * @return A <code>Collection</code> containing all
+	 * the reservations retrieved from the data base.
+	 * 
+	 * @throws GestionResourceException indicates there is a problem.
+	 */
+	public List<Reservation> findAll () throws GestionResourceException ;
 
 }

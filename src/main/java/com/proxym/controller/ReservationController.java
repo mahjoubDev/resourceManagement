@@ -1,12 +1,17 @@
 package com.proxym.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proxym.business.ReservationInfo;
+import com.proxym.domain.Reservation;
 import com.proxym.exception.GestionResourceException;
 import com.proxym.service.ReservationService;
 import com.wordnik.swagger.annotations.Api;
@@ -57,10 +62,24 @@ public class ReservationController {
 	 */
 	@RequestMapping(value="/update",method=RequestMethod.POST,produces = "application/json")
 	@ApiOperation(value = "Update existing booking", notes = "Update existing booking")
-	public void updateReservation (ReservationInfo reservationInfo) throws GestionResourceException{
+	public void updateReservation (@PathVariable String referenceReservation, @RequestBody ReservationInfo reservationInfo) throws GestionResourceException{
 		
-		LOGGER.debug("updating  existing  reservation from controller ", reservationInfo);
-		reservationService.updateReservation(reservationInfo);
+		LOGGER.debug("updating  existing  reservation from controller ", referenceReservation,reservationInfo);
+		reservationService.updateReservation(referenceReservation,reservationInfo);
+		
+	}
+	
+	/**
+	 * shows all the existing reservation in that have been added to
+	 * the system.
+	 * 
+	 * @return A <code>Collection</code> containing all the reservations.
+	 * @throws GestionResourceException indicates there is a problem.
+	 */
+	public List<Reservation> getAllReservation() throws GestionResourceException {
+		
+		LOGGER.debug("get all the reservation");
+		return reservationService.findAll();
 		
 	}
 	
@@ -72,10 +91,10 @@ public class ReservationController {
 	 */
 	@RequestMapping(value="/delete",method=RequestMethod.POST,produces = "application/json")
 	@ApiOperation(value = "Delete existing booking", notes = "Delete existing booking")
-	public void deleteReservation (ReservationInfo reservationInfo) throws GestionResourceException{
+	public void deleteReservation (@PathVariable String referenceReservation) throws GestionResourceException{
 		
-		LOGGER.debug("deleting existing reservation from controller ", reservationInfo);
-		reservationService.deleteReservation(reservationInfo);
+		LOGGER.debug("deleting existing reservation from controller ", referenceReservation);
+		reservationService.deleteReservation(referenceReservation);
 		
 	}
 	

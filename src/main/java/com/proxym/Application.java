@@ -9,9 +9,9 @@ import org.springframework.stereotype.Controller;
 @ComponentScan("com.proxym")
 @EnableAutoConfiguration
 public class Application {
-	
-	 public static void main(String[] args) {
-	        SpringApplication.run(Application.class, args);
-	    }
+
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}           
 
 }

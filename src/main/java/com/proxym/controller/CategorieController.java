@@ -93,7 +93,7 @@ public class CategorieController {
 	 * @throws GestionResourceException indicate there is a problem in processing.
 	 * 
 	 */
-	@RequestMapping(value="",method=RequestMethod.GET,produces="application/json")
+	@RequestMapping(value="/getList",method=RequestMethod.GET,produces="application/json")
 	@ApiOperation(value ="get the list of categories in the system", notes="GetListe")
 	public List<Categorie> getListCategories() throws GestionResourceException{
 		

@@ -16,12 +16,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 /** Reservation  object is a representation of Reservations data.
  * 
  * @author Nessrine
  * @version 1.0.
  *
  */
+@JsonIgnoreProperties({"id","user","resource"})
 @SuppressWarnings("serial")
 @Entity
 public class Reservation implements Serializable {
