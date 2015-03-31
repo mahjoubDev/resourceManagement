@@ -3,13 +3,10 @@ package com.proxym.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.proxym.business.UserInfo;
@@ -17,8 +14,6 @@ import com.proxym.exception.GestionResourceException;
 import com.proxym.service.UserService;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiResponse;
-import com.wordnik.swagger.annotations.ApiResponses;
 
 /**
  * Rest controller for managing the User.
@@ -29,7 +24,7 @@ import com.wordnik.swagger.annotations.ApiResponses;
 @Api(basePath = "/proxym", value = "Users", description = "Operations with users", produces = "application/json")
 @RestController
 @RequestMapping(value = "/proxym/user", produces = MediaType.APPLICATION_JSON_VALUE)
-public class UsersController {
+public class UsersController extends AbstractRestHandler {
 
 	/**
 	 * user service {@link UserService}.
@@ -95,10 +90,5 @@ public class UsersController {
 		return userService.getUserById(1l).toBusiness();
 		
 	}
-
-//	@RequestMapping("/Hello")
-//	public String index() {
-//		return "Welcome to the home page!";
-//	}
 
 }

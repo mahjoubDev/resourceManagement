@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,11 +27,12 @@ import com.wordnik.swagger.annotations.ApiOperation;
 @Api(basePath = "/proxym", value = "Reservation", description = "Operations with booking", produces = "application/json")
 @RestController
 @RequestMapping("/proxym/reservation")
-public class ReservationController {
+public class ReservationController extends AbstractRestHandler {
 	
 	/**
 	 * reservation service {@link ReservationService}.
 	 */
+	@Autowired
 	private ReservationService reservationService;
 	
 	/**
@@ -47,7 +49,7 @@ public class ReservationController {
 	 */
 	@RequestMapping(value="/add",method=RequestMethod.POST,produces = "application/json")
 	@ApiOperation(value = "Create new booking", notes = "Create new booking booking")
-	public void addReservation (ReservationInfo reservationInfo) throws GestionResourceException{
+	public void addReservation (@RequestBody ReservationInfo reservationInfo) throws GestionResourceException{
 		
 		LOGGER.debug("adding new reservation from controller ", reservationInfo);
 		reservationService.addReservation(reservationInfo);
@@ -60,7 +62,7 @@ public class ReservationController {
 	 * @param reservationInfo
 	 * @throws GestionResourceException
 	 */
-	@RequestMapping(value="/update",method=RequestMethod.POST,produces = "application/json")
+	@RequestMapping(value="/{referenceReservation:.+}/update",method=RequestMethod.POST,produces = "application/json")
 	@ApiOperation(value = "Update existing booking", notes = "Update existing booking")
 	public void updateReservation (@PathVariable String referenceReservation, @RequestBody ReservationInfo reservationInfo) throws GestionResourceException{
 		
@@ -76,6 +78,8 @@ public class ReservationController {
 	 * @return A <code>Collection</code> containing all the reservations.
 	 * @throws GestionResourceException indicates there is a problem.
 	 */
+	@RequestMapping(value="/getList", method=RequestMethod.GET,produces="application/json")
+	@ApiOperation(value="get the list of reservation", notes="get the list of reservation")
 	public List<Reservation> getAllReservation() throws GestionResourceException {
 		
 		LOGGER.debug("get all the reservation");
@@ -89,7 +93,7 @@ public class ReservationController {
 	 * @param reservationInfo
 	 * @throws GestionResourceException
 	 */
-	@RequestMapping(value="/delete",method=RequestMethod.POST,produces = "application/json")
+	@RequestMapping(value="/{referenceReservation:.+}/delete",method=RequestMethod.POST,produces = "application/json")
 	@ApiOperation(value = "Delete existing booking", notes = "Delete existing booking")
 	public void deleteReservation (@PathVariable String referenceReservation) throws GestionResourceException{
 		

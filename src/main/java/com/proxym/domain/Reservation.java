@@ -2,10 +2,11 @@ package com.proxym.domain;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.proxym.enums.TypeDate;
 
 /** Reservation  object is a representation of Reservations data.
  * 
@@ -62,10 +64,12 @@ public class Reservation implements Serializable {
 	 */
 	private int duree;
 	
+
+	
 	/**
 	 * The User who are  doing the reservation.
 	 */
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="user")
 	private User user ;
 	
@@ -249,8 +253,6 @@ public class Reservation implements Serializable {
 	public void setDuree(int duree) {
 		this.duree = duree;
 	}
-	
-	
-	
+
 	
 }

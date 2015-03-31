@@ -28,7 +28,7 @@ import com.wordnik.swagger.annotations.ApiOperation;
 @Api(basePath = "/proxym", value = "Category", description = "Operations with categories", produces = "application/json")
 @RestController
 @RequestMapping("/proxym/category")
-public class CategorieController {
+public class CategorieController extends AbstractRestHandler{
 	
 	/**
 	 * category service {@link CategorieService}.

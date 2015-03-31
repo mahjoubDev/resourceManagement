@@ -2,10 +2,16 @@ package com.proxym.business;
 
 import java.util.Date;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.proxym.domain.Reservation;
 import com.proxym.domain.User;
+import com.proxym.enums.TypeDate;
 import com.proxym.serialiser.DateSerializer;
+import com.proxym.serialiser.TypeDateDeserializer;
 
 public class ReservationInfo {
 
@@ -40,6 +46,8 @@ public class ReservationInfo {
 	 *  resources related to this reservation.
 	 */
 	private String referenceResource ;
+	
+
 
 	/**
 	 * default constructor.
@@ -197,6 +205,7 @@ public class ReservationInfo {
 	public void setReferenceResource(String referenceResource) {
 		this.referenceResource = referenceResource;
 	}
+
 
 	/**
 	 * Create domain reservation object from business one.

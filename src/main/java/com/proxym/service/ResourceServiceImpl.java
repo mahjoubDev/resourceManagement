@@ -13,6 +13,7 @@ import com.proxym.domain.Resource;
 import com.proxym.exception.GestionResourceException;
 import com.proxym.repositories.CategorieRepository;
 import com.proxym.repositories.ResourceRepository;
+import com.proxym.utils.ResourceValidator;
 
 /**
  * Service class for managing Resources.
@@ -29,14 +30,14 @@ public class ResourceServiceImpl implements ResourceService {
 	 */
 	@Autowired
 	private ResourceRepository resourceRepository;
-	
+
 	/**
 	 * categiry repository.
 	 * 
 	 */
 	@Autowired
 	private CategorieRepository categorieRepository;
-	
+
 	/**
 	 * The logger instance . All log messages from this class are routed through
 	 * this member.
@@ -48,38 +49,52 @@ public class ResourceServiceImpl implements ResourceService {
 	 */
 	public void addResource(ResourceInfo resourceInfo)
 			throws GestionResourceException {
-		
+
 		LOGGER.debug("add new resource to data base ", resourceInfo);
 		Categorie ExistingCategory=categorieRepository.findByReference(resourceInfo.getReferenceCategory());
+		ResourceValidator.checkCategoryExist(resourceInfo.getReferenceCategory(), ExistingCategory);
 		Resource resource=resourceInfo.toDomain();
 		resource.setCategory(ExistingCategory);
 		resourceRepository.save(resource);
-		
+
 	}
 
 	/**
 	 * {@inheritDoc}.
 	 */
-	public void updateResource(ResourceInfo resourceInfo)
+	public void updateResource(String reference, ResourceInfo resourceInfo)
 			throws GestionResourceException {
-		
+
 		LOGGER.debug("update existing resource into  data base ", resourceInfo);
+
+		//check if the resource exists otherwise thro an exception
+		Resource existingResource=resourceRepository.findByReference(reference);
+		ResourceValidator.checkResourceExist(reference, existingResource);
+
+		//check if the categori exists otherwise throw nan exception
 		Categorie ExistingCategory=categorieRepository.findByReference(resourceInfo.getReferenceCategory());
+		ResourceValidator.checkCategoryExist(resourceInfo.getReferenceCategory(), ExistingCategory);
+
 		Resource resource=resourceInfo.toDomain();
+		resource.setId(existingResource.getId());
 		resource.setCategory(ExistingCategory);
 		resourceRepository.save(resource);
-		
+
 	}
 
 	/**
 	 * {@inheritDoc}.
 	 */
-	public void deleteResource(ResourceInfo resourceInfo)
+	public void deleteResource(String reference)
 			throws GestionResourceException {
-		
-		LOGGER.debug("delete resource fom  data base ", resourceInfo);
-		resourceRepository.delete(resourceInfo.toDomain());
-		
+
+		LOGGER.debug("delete resource fom  data base ", reference);
+
+		//check if the resource exists otherwise thro an exception
+		Resource existingResource=resourceRepository.findByReference(reference);
+		ResourceValidator.checkResourceExist(reference, existingResource);
+		resourceRepository.delete(existingResource);
+
 	}
 
 	/**
@@ -87,7 +102,7 @@ public class ResourceServiceImpl implements ResourceService {
 	 */
 	@Override
 	public List<Resource> findAll() throws GestionResourceException {
-		
+
 		LOGGER.debug("get all the resources ewisting in the data base");
 		return resourceRepository.findAll();
 	}

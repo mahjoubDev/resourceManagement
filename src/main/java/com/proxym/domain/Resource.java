@@ -4,13 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.proxym.enums.TypeDate;
 
 
 
@@ -20,6 +23,7 @@ import javax.persistence.OneToMany;
  * @version 1.0.
  *
  */
+@JsonIgnoreProperties({"id","category"})
 @SuppressWarnings("serial")
 @Entity
 public class Resource implements Serializable {
@@ -45,6 +49,17 @@ public class Resource implements Serializable {
 	 * dDescription of the resource.
 	 */
 	private String description;
+	
+	/**
+	 * the type of date it can be hour, day or week.
+	 */
+	@Enumerated(EnumType.STRING)
+	private TypeDate typeDate;
+	
+	/**
+	 * the max of duration for a given reservation.
+	 */
+	private Integer dureeMax;
 	
 	/**
 	 * category which the resource belong to.
@@ -142,6 +157,45 @@ public class Resource implements Serializable {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * Get the type of date.
+	 * 
+	 * @return A object representing the type of date.
+	 */
+	public TypeDate getTypeDate() {
+		return typeDate;
+	}
+
+	/**
+	 * Sets  the type of date.
+	 * 
+	 * @param typeDate A object representing the new 
+	 * type of date.
+	 */
+	public void setTypeDate(TypeDate typeDate) {
+		this.typeDate = typeDate;
+	}
+	
+	/**
+	 * the max of duration.
+	 * 
+	 * @return A <code>integer</code> containing the max 
+	 * of duration.
+	 */
+	public Integer getDureeMax() {
+		return dureeMax;
+	}
+
+	/**
+	 * The max of duration.
+	 * 
+	 * @param dureeMax A <code>integer</code> containing the max 
+	 * of duration.
+	 */
+	public void setDureeMax(Integer dureeMax) {
+		this.dureeMax = dureeMax;
 	}
 
 	/**

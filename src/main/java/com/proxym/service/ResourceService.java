@@ -27,18 +27,19 @@ public interface ResourceService {
 	/**
 	 * update existing resource.
 	 * 
-	 * @param resourceInfo
+	 * @param resourceInfo carries the new 
+	 * @param reference reference of the resource.
 	 * @throws GestionResourceException indicates there is problem.
 	 */
-	public void updateResource (ResourceInfo resourceInfo) throws GestionResourceException;
+	public void updateResource (String reference,ResourceInfo resourceInfo) throws GestionResourceException;
 	
 	/**
 	 * delete existing resource.
 	 * 
-	 * @param resourceInfo
+	 * @param reference of the resource.
 	 * @throws GestionResourceException indicates there is problem.
 	 */
-	public void deleteResource (ResourceInfo resourceInfo) throws GestionResourceException;
+	public void deleteResource (String refrence) throws GestionResourceException;
 	
 	/**
 	 * Get all the resources existing in the system.

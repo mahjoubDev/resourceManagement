@@ -53,5 +53,16 @@ public interface ReservationService {
 	 * @throws GestionResourceException indicates there is a problem.
 	 */
 	public List<Reservation> findAll () throws GestionResourceException ;
+	
+	/**
+	 * Gets alla the reservation before 15 minutes
+	 * 
+	 * @return A <code>Collection</code> containing all
+	 * the reservations retrieved from the data base and it 
+	 * remains 15 minute for starting.
+	 * 
+	 * @throws GestionResourceException indicates there is a problem.
+	 */
+	public List<Reservation> getReservationListBeforFiftyMinutes() throws GestionResourceException ;
 
 }

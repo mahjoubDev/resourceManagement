@@ -41,5 +41,21 @@ public class Constants {
 	 * that it's reservation is ready.
 	 */
 	public static final Integer MAX_REMAINING=15; 
+	
+	/**
+	 * the default code if an internal exception have been left.
+	 */
+	public static final String DEFAULT_CODE_ERROR = "0.3";
+	
+	/**
+	 * the code error code for syntactically incorrect Requette.
+	 */
+	public static final String CODE_ERROR_SYNTAXE = "0.4";
+	
+	/**
+	 * postFix string mail that will be concatenate to
+	 * login user to form the mail address.
+	 */
+	public static String POST_FIX_MAIL="@proxym.com";
 
 }
