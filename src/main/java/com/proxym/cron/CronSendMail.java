@@ -1,24 +1,18 @@
 package com.proxym.cron;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 
 import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.velocity.VelocityEngineUtils;
 
 import com.proxym.config.MailSender;
 import com.proxym.controller.CategorieController;
@@ -67,7 +61,7 @@ public class CronSendMail {
 	 * @throws GestionResourceException
 	 *             indicate there is processing problem.
 	 */
-	@Scheduled(cron = "0/30 * * * * ?")
+	//@Scheduled(cron = "0/30 * * * * ?")
 	public void sendUserEmail() throws MessagingException, GestionResourceException {
 		List<Reservation> reservations = reservationService.getReservationListBeforFiftyMinutes();
 
@@ -75,7 +69,7 @@ public class CronSendMail {
 			
 			LOGGER.debug("processing reservation "+reservation.getReference());
 			
-			String mailUser = reservation.getUser().getLogin() + Constants.POST_FIX_MAIL;
+			String mailUser = reservation.getLoginUser() + Constants.POST_FIX_MAIL;
 			SendMail(mailUser, "notification pour la reservation " + reservation.getReference(),
 					"Votre reservation pour la " + reservation.getResource().getName() + " bébutera aprés 15 minute ");
 

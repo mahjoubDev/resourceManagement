@@ -6,15 +6,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.proxym.business.ReservationInfo;
 import com.proxym.domain.Reservation;
 import com.proxym.domain.Resource;
-import com.proxym.domain.User;
 import com.proxym.exception.GestionResourceException;
 import com.proxym.repositories.ReservationRepository;
 import com.proxym.repositories.ResourceRepository;
-import com.proxym.repositories.UserRepository;
 import com.proxym.utils.ResourceValidator;
 
 /**
@@ -32,12 +29,6 @@ public class ReservationServiceImpl implements ReservationService {
 	 */
 	@Autowired
 	private ReservationRepository reservationRepository;
-
-	/**
-	 * User repository.
-	 */
-	@Autowired
-	private UserRepository userRepository;
 
 	/**
 	 * resource repository.
@@ -58,10 +49,6 @@ public class ReservationServiceImpl implements ReservationService {
 
 		LOGGER.debug("add new reservation to data base ", reservationInfo);
 
-		// check if the coming user exists in the system otherwise throw exception
-		User user = userRepository.findByLogin(reservationInfo.getLoginUser());
-		ResourceValidator.checkUserExist(reservationInfo.getLoginUser(), user);
-
 		// check if the coming resource exists in the system otherwise throw exception
 		Resource resource = resourceRepository.findByReference(reservationInfo.getReferenceResourcee());
 		ResourceValidator.checkResourceExist(reservationInfo.getReferenceResourcee(), resource);
@@ -75,7 +62,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 		// add the new reservation to data base.
 		Reservation reservation = reservationInfo.toDomain();
-		reservation.setUser(user);
+		reservation.setLoginUser(reservationInfo.getLoginUser());
 		reservation.setResource(resource);
 		reservationRepository.save(reservation);
 
@@ -94,9 +81,6 @@ public class ReservationServiceImpl implements ReservationService {
 		Reservation existingReservation = reservationRepository.findByreference(referenceReservation);
 		ResourceValidator.checkReservationExist(referenceReservation, existingReservation);
 
-		// check if the coming user exists in the system otherwise throw exception
-		User user = userRepository.findByLogin(reservationInfo.getLoginUser());
-		ResourceValidator.checkUserExist(reservationInfo.getLoginUser(), user);
 
 		// check if the coming resource exists in the system otherwise throw exception
 		Resource resource = resourceRepository.findByReference(reservationInfo.getReferenceResourcee());
@@ -108,7 +92,7 @@ public class ReservationServiceImpl implements ReservationService {
 		// update the rservation with the coming informations.
 		Reservation reservation = reservationInfo.toDomain();
 		reservation.setId(existingReservation.getId());
-		// reservation.setUser(user);
+		reservation.setLoginUser(reservationInfo.getLoginUser());
 		// reservation.setResource(resource);
 		reservationRepository.save(reservation);
 

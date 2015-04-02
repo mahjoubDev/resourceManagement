@@ -6,7 +6,6 @@ import com.proxym.business.ReservationInfo;
 import com.proxym.domain.Categorie;
 import com.proxym.domain.Reservation;
 import com.proxym.domain.Resource;
-import com.proxym.domain.User;
 import com.proxym.enums.TypeDate;
 import com.proxym.exception.GestionResourceException;
 
@@ -34,21 +33,6 @@ public class ResourceValidator {
 		}
 	}
 
-	/**
-	 * Check if the user with the target login
-	 * exist in the system.
-	 * 
-	 * @param loginUser login of the user.
-	 * @param user user that matches the login.
-	 * @throws GestionResourceException indicates there is a problem.
-	 */
-	public static void checkUserExist(String loginUser,User user) throws GestionResourceException{
-
-		if(user==null){
-			throw new GestionResourceException("", "L'utilisateur de login "+loginUser+"  n'existe pas");
-		}
-
-	}
 
 	/**
 	 * Check if the resource with the target reference

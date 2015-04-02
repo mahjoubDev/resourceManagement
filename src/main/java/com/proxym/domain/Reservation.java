@@ -5,20 +5,14 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.proxym.enums.TypeDate;
 
 /** Reservation  object is a representation of Reservations data.
  * 
@@ -45,13 +39,11 @@ public class Reservation implements Serializable {
 	/**
 	 * Date when the reservation starts.
 	 */
-	@Temporal(TemporalType.DATE)
 	private Date dateStart ;
 	
 	/**
 	 * Date when the reservation ends.
 	 */
-	@Temporal(TemporalType.DATE)
 	private Date dateEnd ;
 	
 	/**
@@ -59,19 +51,12 @@ public class Reservation implements Serializable {
 	 */
 	private String description;
 	
-	/**
-	 * the duration of the occupation.
-	 */
-	private int duree;
-	
 
 	
 	/**
 	 * The User who are  doing the reservation.
 	 */
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="user")
-	private User user ;
+	private String loginUser ;
 	
 	/**
 	 * List of resources related to this reservation.
@@ -193,27 +178,25 @@ public class Reservation implements Serializable {
 	}
 
 	/**
-	 * Returns the {@link User} who did the 
-	 * reservation.
+	 * Gets the user login.
 	 * 
-	 * @return the User object who did the
-	 * reservation.
+	 * @return A <code>String</code> containing the login
+	 * of the user.
 	 */
-	public User getUser() {
-		return user;
+	public String getLoginUser() {
+		return loginUser;
 	}
 
 	/**
-	 * Sets the current user who are doing the
-	 * this reservation.
+	 * Sets the user login.
 	 * 
-	 * @param user the User object who are doing  this
-	 * reservation
+	 * @param loginUser A <code>String</code> containing the login
+	 * of the user.
 	 */
-	public void setUser(User user) {
-		this.user = user;
+	public void setLoginUser(String loginUser) {
+		this.loginUser = loginUser;
 	}
-	
+
 	/**
 	 * Returns the  resource related to this reservation.
 	 * 
@@ -232,26 +215,6 @@ public class Reservation implements Serializable {
 	 */
 	public void setResource(Resource resource) {
 		this.resource = resource;
-	}
-
-	/**
-	 * gets  the duration.
-	 * 
-	 * @return A <code>int</code> containing the duration of 
-	 * reservation.
-	 */
-	public int getDuree() {
-		return duree;
-	}
-
-	/**
-	 * Sets the durartion.
-	 * 
-	 * @param duree A <code>int</code> containing the duration of 
-	 * reservation.
-	 */
-	public void setDuree(int duree) {
-		this.duree = duree;
 	}
 
 	

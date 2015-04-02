@@ -2,17 +2,12 @@ package com.proxym.business;
 
 import java.util.Date;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.proxym.domain.Reservation;
-import com.proxym.domain.User;
-import com.proxym.enums.TypeDate;
 import com.proxym.serialiser.DateSerializer;
-import com.proxym.serialiser.TypeDateDeserializer;
-
 public class ReservationInfo {
 
 	/**
@@ -23,13 +18,15 @@ public class ReservationInfo {
 	/**
 	 * Date when the reservation starts.
 	 */
-	@JsonSerialize(using=DateSerializer.class)
+	//@JsonSerialize(using=DateSerializer.class)
+	@JsonDeserialize(using=DateSerializer.class)
 	private Date dateStart ;
 
 	/**
 	 * Date when the reservation ends.
 	 */
-	@JsonSerialize(using=DateSerializer.class)
+	//@JsonSerialize(using=DateSerializer.class)
+	@JsonDeserialize(using=DateSerializer.class)
 	private Date dateEnd ;
 
 	/**
