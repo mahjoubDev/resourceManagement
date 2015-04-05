@@ -42,9 +42,8 @@ public class CategorieServiceImpl implements CategorieService{
 			throws GestionResourceException {
 		
 		LOGGER.debug("add new category to data base ", categorieInfo);
-		OGGER.debug("Test from nessrine's pc for git update", categorieInfo);
+		LOGGER.debug("Test from nessrine's pc for git update for the second time", categorieInfo);
 		categorieRepository.save(categorieInfo.toDomain());
-		
 	}
 
 	/**
