@@ -91,15 +91,15 @@ public class MailSender {
 		mailSender.setPassword(password);
 		return mailSender;
 	}
-
-	@Bean
-	public VelocityEngineFactoryBean velocityEngine() {
-		VelocityEngineFactoryBean velocityEngine =
-				new VelocityEngineFactoryBean();
-		Properties props = new Properties();
-		props.setProperty("resource.loader", "class");
-		props.setProperty("class.resource.loader.class",ClasspathResourceLoader.class.getName());
-		velocityEngine.setVelocityProperties(props);
-		return velocityEngine;
-	}
+//
+//	@Bean
+//	public VelocityEngineFactoryBean velocityEngine() {
+//		VelocityEngineFactoryBean velocityEngine =
+//				new VelocityEngineFactoryBean();
+//		Properties props = new Properties();
+//		props.setProperty("resource.loader", "class");
+//		props.setProperty("class.resource.loader.class",ClasspathResourceLoader.class.getName());
+//		velocityEngine.setVelocityProperties(props);
+//		return velocityEngine;
+//	}
 }

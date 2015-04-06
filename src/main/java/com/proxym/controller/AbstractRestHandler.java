@@ -26,7 +26,7 @@ import com.proxym.utils.Constants;
  *
  */
 @Configurable
-@PropertySource("classpath:exception.properties")
+//@PropertySource("classpath:exception.properties")
 public abstract class AbstractRestHandler {
 
 	/**
