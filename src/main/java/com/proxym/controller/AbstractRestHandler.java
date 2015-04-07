@@ -26,7 +26,7 @@ import com.proxym.utils.Constants;
  *
  */
 @Configurable
-@PropertySource("classpath:exception.properties")
+//@PropertySource("classpath:exception.properties")
 public abstract class AbstractRestHandler {
 
 	/**
@@ -69,7 +69,7 @@ public abstract class AbstractRestHandler {
 	@ExceptionHandler({ Exception.class })
 	@ResponseBody
 	InfoErreur handleException(HttpServletRequest req, Exception ex) {
-		LOGGER.error("interne error 500", ex);
+		LOGGER.error("interne error internale  500", ex);
 		return new InfoErreur(req.getRequestURI(), Constants.DEFAULT_CODE_ERROR,ex.getLocalizedMessage());
 	}
 
