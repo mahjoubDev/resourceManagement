@@ -50,6 +50,7 @@ public class CategorieController extends AbstractRestHandler{
 	 */
 	@RequestMapping(value="/add",method=RequestMethod.POST,produces = "application/json")
 	@ApiOperation(value = "Create new category", notes = "Creates new category")
+	
 	public void addCategory (@RequestBody CategorieInfo categorieInfo) throws GestionResourceException{
 		
 		LOGGER.debug("add new category", categorieInfo);
