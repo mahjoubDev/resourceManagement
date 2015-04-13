@@ -1,9 +1,21 @@
 package com.proxym.business;
 
 
+import java.io.Serializable;
+
 import com.proxym.domain.Categorie;
 
-public class CategorieInfo {
+/**
+ * 
+ * @author Nessrine
+ *
+ */
+public class CategorieInfo implements Serializable{
+
+	/**
+	 * Serial id.
+	 */
+	private static final long serialVersionUID = 7270711425759845852L;
 
 	/**
 	 * name of category.

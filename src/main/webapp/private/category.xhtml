@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:composition template="../index.xhtml">
+
+	<ui:define name="title">
+		<style type="text/css">
+.waiting {
+	background-color: white !important;
+	background-image: none !important;
+}
+</style>
+	</ui:define>
+	<ui:define name="body">
+		<h:form>
+    <p:growl id="msgs" showDetail="true" />
+ 
+    <p:fieldset legend="Liste de categroies" style="margin-bottom:20px">
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:outputText
+                value="liste of categorie must be set here later" />
+        </h:panelGrid>
+    </p:fieldset>
+ 
+    <p:fieldset legend="Ajout categorie" toggleable="true" toggleSpeed="500">
+        <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" update="msgs" />
+        <h:panelGrid columns="2" cellpadding="5">
+            <h:form id="formZoneModif">
+				<h:panelGrid columns="2" style="text-align:center;" layout="block">
+
+					<h:outputText value="Name categorie : " />
+					<p:inputText value="#{jsfCategorycontroller.categorieInfoToAdd.nameCategorie}" />
+					<h:outputText value="Designation: " />
+					<p:inputText value="#{jsfCategorycontroller.categorieInfoToAdd.reference}" />
+
+					<p:commandButton value="Submit"
+						action="#{jsfCategorycontroller.addcategory()}" 
+						ajax="false" />
+
+
+				</h:panelGrid>
+			</h:form>
+        </h:panelGrid>
+    </p:fieldset>
+</h:form>
+
+	</ui:define>
+</ui:composition>
+</html>
