@@ -17,36 +17,46 @@
 	</ui:define>
 	<ui:define name="body">
 		<h:form>
-    <p:growl id="msgs" showDetail="true" />
- 
-    <p:fieldset legend="Liste de categroies" style="margin-bottom:20px">
-        <h:panelGrid columns="2" cellpadding="5">
-            <h:outputText
-                value="liste of categorie must be set here later" />
-        </h:panelGrid>
-    </p:fieldset>
- 
-    <p:fieldset legend="Ajout categorie" toggleable="true" toggleSpeed="500">
-        <p:ajax event="toggle" listener="#{fieldsetView.handleToggle}" update="msgs" />
-        <h:panelGrid columns="2" cellpadding="5">
-            <h:form id="formZoneModif">
-				<h:panelGrid columns="2" style="text-align:center;" layout="block">
+			<p:growl id="msgs" showDetail="true" />
 
-					<h:outputText value="Name categorie : " />
-					<p:inputText value="#{jsfCategorycontroller.categorieInfoToAdd.nameCategorie}" />
-					<h:outputText value="Designation: " />
-					<p:inputText value="#{jsfCategorycontroller.categorieInfoToAdd.reference}" />
+			<p:fieldset legend="Liste de categroies" toggleable="true" style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:dataTable var="cat" value="#{jsfCategoryController.getAllCategories()}">
+						<p:column headerText="Reference catgory">
+							<h:outputText value="#{cat.reference}" />
+						</p:column>
 
-					<p:commandButton value="Submit"
-						action="#{jsfCategorycontroller.addcategory()}" 
-						ajax="false" />
-
-
+						<p:column headerText="Name category">
+							<h:outputText value="#{cat.nameCategorie}" />
+						</p:column>
+					</p:dataTable>
 				</h:panelGrid>
-			</h:form>
-        </h:panelGrid>
-    </p:fieldset>
-</h:form>
+			</p:fieldset>
+
+			<p:fieldset legend="Ajout categorie" toggleable="true"
+				toggleSpeed="500">
+				<p:ajax event="toggle" listener="#{fieldsetView.handleToggle}"
+					update="msgs" />
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:form id="formZoneModif">
+						<h:panelGrid columns="2" style="text-align:center;" layout="block">
+
+							<h:outputText value="Name categorie : " />
+							<p:inputText
+								value="#{jsfCategoryController.categorieInfoToAdd.nameCategorie}" />
+							<h:outputText value="Designation: " />
+							<p:inputText
+								value="#{jsfCategoryController.categorieInfoToAdd.reference}" />
+
+							<p:commandButton value="Submit"
+								action="#{jsfCategoryController.addcategory()}" ajax="false" />
+
+
+						</h:panelGrid>
+					</h:form>
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
 
 	</ui:define>
 </ui:composition>
