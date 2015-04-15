@@ -16,6 +16,8 @@
 
 	<properties>
 		<swagger-springmvc.version>0.9.5</swagger-springmvc.version>
+        <tomcat.version>7.0.59</tomcat.version>
+		
 	</properties>
 
 
