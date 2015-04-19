@@ -40,6 +40,13 @@ public class JsfCategoryController {
 	 * object used to hold the category fields.
 	 */
 	private CategorieInfo categorieInfoToAdd = new CategorieInfo();
+	
+	/**
+	 * the category selected by the user for edit 
+	 * or for delete.
+	 */
+	private Categorie selectedCategory;
+	
 
 	/**
 	 * add new category.
@@ -54,6 +61,36 @@ public class JsfCategoryController {
 			categorieInfoToAdd = new CategorieInfo();
 		}
 	}
+	
+	/**
+	 * Delete the selected category selected by
+	 * the user.
+	 * 
+	 * @throws GestionResourceException indicates there is a problem.
+	 */
+	public void deleteCategory() throws GestionResourceException{
+		
+		LOGGER.debug("delete the category ", selectedCategory);
+		if(selectedCategory != null ){
+			categorieService.deleteCategory(selectedCategory.getReference());
+			selectedCategory=null;
+		}
+	}
+	
+	/**
+	 * update the category selected b
+	 * the user.
+	 * 
+	 * @throws GestionResourceException indicates there is a problem.
+	 */
+	public void updateCategory () throws GestionResourceException {
+		
+		LOGGER.debug("update the category ", selectedCategory);
+		if(selectedCategory != null ) {
+			categorieService.updateCategory(selectedCategory.getReference(), selectedCategory.toBusiness());
+			selectedCategory = null ;
+		}
+	}
 
 	/**
 	 * Gets all the categories.
@@ -64,7 +101,7 @@ public class JsfCategoryController {
 	 */
 	public List<Categorie> getAllCategories() throws GestionResourceException {
 		
-		LOGGER.debug("retieving alla the categories existing in the system");
+		LOGGER.debug("retieving all the categories existing in the system");
 		return categorieService.findAll();
 	}
 
@@ -83,5 +120,23 @@ public class JsfCategoryController {
 	public void setCategorieInfoToAdd(CategorieInfo categorieInfoToAdd) {
 		this.categorieInfoToAdd = categorieInfoToAdd;
 	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Categorie getSelectedCategory() {
+		return selectedCategory;
+	}
+
+	/**
+	 * 
+	 * @param selectedCategory
+	 */
+	public void setSelectedCategory(Categorie selectedCategory) {
+		this.selectedCategory = selectedCategory;
+	}
+	
+	
 
 }

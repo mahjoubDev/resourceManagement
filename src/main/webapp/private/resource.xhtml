@@ -4,7 +4,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
 <ui:composition template="../index.xhtml">
 
 	<ui:define name="title">
@@ -16,7 +16,161 @@
 </style>
 	</ui:define>
 	<ui:define name="body">
-		
+		<h:form>
+			<p:growl id="msgs" showDetail="true" />
+
+			<p:fieldset legend="Liste de resource" toggleable="true"
+				style="margin-bottom:20px">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:dataTable var="res"
+						value="#{jsfResourceController.getAllResources()}">
+						<p:column headerText="Reference resource">
+							<h:outputText value="#{res.reference}" />
+						</p:column>
+
+						<p:column headerText="Nom resource">
+							<h:outputText value="#{res.name}" />
+						</p:column>
+
+						<p:column headerText="Description resource">
+							<h:outputText value="#{res.description}" />
+						</p:column>
+
+						<p:column headerText="Type date">
+							<h:outputText value="#{res.typeDate}" />
+						</p:column>
+
+						<p:column headerText="Duree max ">
+							<h:outputText value="#{res.dureeMax}" />
+						</p:column>
+
+						<p:column headerText="Non category">
+							<h:outputText value="#{res.category.nameCategorie}" />
+						</p:column>
+
+						<p:column headerText="Modifier ">
+							<p:commandLink onclick="PF('categoryModif').show();"
+								title="Modifier" update=":formEditCategory"
+								actionListener="#{jsfCategoryController.setSelectedCategory(cat)}">
+								<p:graphicImage value="../img/edit.jpg" height=" 35" width="50" />
+							</p:commandLink>
+						</p:column>
+
+						<p:column headerText="Supprimer ">
+
+							<p:commandLink onclick="PF('categoryDelete').show()"
+								title="supprimer" update=":formDelCat"
+								actionListener="#{jsfCategoryController.setSelectedCategory(cat)}">
+								<f:setPropertyActionListener
+									value="#{jsfCategoryController.selectedCategory}"
+									target="#{cat}" />
+								<p:graphicImage value="../img/delete.jpg" height=" 35"
+									width="50" />
+							</p:commandLink>
+
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+			</p:fieldset>
+
+			<p:fieldset legend="Ajout categorie" toggleable="true"
+				toggleSpeed="500">
+				<p:ajax event="toggle" listener="#{fieldsetView.handleToggle}"
+					update="msgs" />
+				<h:panelGrid columns="2" cellpadding="5" cellspacing="10">
+					<h:form id="formZoneModif">
+						<h:panelGrid columns="4" style="text-align:center;" layout="block">
+
+							<h:outputText value="Refrence  : " />
+							<p:inputText
+								value="#{jsfResourceController.resourceToAdd.nameCategorie}" />
+
+
+							<h:outputText value="Nom  : " />
+							<p:inputText
+								value="#{jsfResourceController.resourceToAdd.reference}" />
+
+
+							<h:outputText value="description : " />
+							<p:inputText
+								value="#{jsfResourceController.resourceToAdd.nameCategorie}" />
+
+							<h:outputText value="Type date: " />
+							<p:inputText
+								value="#{jsfResourceController.resourceToAdd.reference}" />
+
+
+							<h:outputText value="Duree max : " />
+							<p:inputText
+								value="#{jsfResourceController.resourceToAdd.nameCategorie}" />
+
+							<h:outputText value="Categorie: " />
+							<p:selectOneMenu converter="#{categoryConverter}" value="#{jsfResourceController.resourceToAdd.category}" >
+								<f:selectItem itemLabel="Selecter categorie" />
+								<f:selectItems value="#{jsfCategoryController.getAllCategories()}" var="cat"
+									itemLabel="#{cat.nameCategorie}" itemValue="#{cat}"
+								 />
+							</p:selectOneMenu>
+
+
+							<p:commandButton value="Submit"
+								action="#{jsfCategoryController.addcategory()}" ajax="false" />
+
+
+						</h:panelGrid>
+					</h:form>
+				</h:panelGrid>
+			</p:fieldset>
+		</h:form>
+
+
+
+		<p:dialog header="Modifier categorie" widgetVar="categoryModif"
+			appendToBody="true" dynamic="true" showEffect="fade"
+			hideEffect="fade" id="dialogCategoryModif" appendTo="@(body)">
+			<h:form id="formEditCategory">
+				<h:panelGrid columns="2" style="text-align:center;" layout="block">
+
+					<h:outputText value="Reférence categorie " />
+					<h:inputText
+						value="#{jsfCategoryController.selectedCategory.reference}"
+						disabled="true" />
+
+					<h:outputText value="nom categorie " />
+					<h:inputText
+						value="#{jsfCategoryController.selectedCategory.nameCategorie}" />
+
+
+					<p:commandButton value="Submit"
+						action="#{jsfCategoryController.updateCategory()}" ajax="false"
+						oncomplete="categoryModif.hide()" />
+
+
+				</h:panelGrid>
+			</h:form>
+
+		</p:dialog>
+
+
+		<p:dialog message="Vous êtes sure de supprimer cette catégorie ?"
+			style="background:white" maximizable="true" minimizable="true"
+			header="Suppression categorie" widgetVar="categoryDelete" width="300"
+			height="100" showEffect="clip" hideEffect="clip">
+			<br />
+			<h:form id="formDelCat">
+				<h:outputText
+					value="Vous êtes sure de supprimer la categorie #{jsfCategoryController.selectedCategory.nameCategorie} ?" />
+				<p:separator />
+				<p:commandButton value="Oui" oncomplete="categoryDelete.hide()"
+					ajax="false" action="#{jsfCategoryController.deleteCategory()}" />
+				<h:outputText />
+				<h:outputText />
+				<p:commandButton id="decline" value="Non"
+					onclick="categoryDelete.hide()"
+					style=" left:75px; position:absolute;" />
+			</h:form>
+		</p:dialog>
+
 
 	</ui:define>
 </ui:composition>

@@ -15,6 +15,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.proxym.business.CategorieInfo;
+import com.proxym.service.CategorieService;
 
 /**A Category  object is a representation of Categories data.
  * 
@@ -134,6 +136,19 @@ public class Categorie implements Serializable {
 	 */
 	public void setResources(Set<Resource> resources) {
 		this.resources = resources;
+	}
+	
+	/**
+	 * gets the business object from the domain one.
+	 * 
+	 * @return A object representing the business object
+	 * for DTO desing pattern.
+	 */
+	public CategorieInfo toBusiness () {
+		CategorieInfo categorieInfo =new CategorieInfo();
+		categorieInfo.setNameCategorie(nameCategorie);
+		categorieInfo.setReference(reference);
+		return categorieInfo;
 	}
 
 

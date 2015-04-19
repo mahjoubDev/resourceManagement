@@ -16,8 +16,8 @@
 
 	<properties>
 		<swagger-springmvc.version>0.9.5</swagger-springmvc.version>
-        <tomcat.version>7.0.59</tomcat.version>
-		
+		<tomcat.version>7.0.59</tomcat.version>
+		<exoplatform.version>4.0.0</exoplatform.version>
 	</properties>
 
 
@@ -160,12 +160,28 @@
 			<artifactId>el-api</artifactId>
 			<version>1.0</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.sun.el</groupId>
 			<artifactId>el-ri</artifactId>
 			<version>1.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>net.bootsfaces</groupId>
+			<artifactId>bootsfaces</artifactId>
+			<version>0.6.6</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>exo</groupId>
+			<artifactId>exoplatform.services.portlet-container.impl</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+
 
 	</dependencies>
 
