@@ -49,7 +49,7 @@ public class Categorie implements Serializable {
 	/**
 	 * List of resources related to this category.
 	 */
-	@OneToMany(mappedBy = "category",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "category",cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
 	private Set<Resource> resources = new HashSet<Resource>(0);
 
 	/**
@@ -151,5 +151,50 @@ public class Categorie implements Serializable {
 		return categorieInfo;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((nameCategorie == null) ? 0 : nameCategorie.hashCode());
+		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
+		result = prime * result + ((resources == null) ? 0 : resources.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Categorie other = (Categorie) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (nameCategorie == null) {
+			if (other.nameCategorie != null)
+				return false;
+		} else if (!nameCategorie.equals(other.nameCategorie))
+			return false;
+		if (reference == null) {
+			if (other.reference != null)
+				return false;
+		} else if (!reference.equals(other.reference))
+			return false;
+		if (resources == null) {
+			if (other.resources != null)
+				return false;
+		} else if (!resources.equals(other.resources))
+			return false;
+		return true;
+	}
+
+	
+	
 
 }

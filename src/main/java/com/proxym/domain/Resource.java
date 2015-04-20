@@ -12,7 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.proxym.business.ResourceInfo;
 import com.proxym.enums.TypeDate;
 
 
@@ -64,7 +66,7 @@ public class Resource implements Serializable {
 	/**
 	 * category which the resource belong to.
 	 */
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name = "category")
 	private Categorie category;
 
@@ -216,6 +218,21 @@ public class Resource implements Serializable {
 	 */
 	public void setCategory(Categorie category) {
 		this.category = category;
+	}
+	/**
+	 * Gets the business from domain.
+	 * 
+	 * @return An object {@link ResourceInfo}}
+	 */
+	public ResourceInfo toBusiness () {
+		ResourceInfo resourceInfo =new ResourceInfo();
+		resourceInfo.setDescription(description);
+		resourceInfo.setDureeMax(dureeMax);
+		resourceInfo.setName(name);
+		resourceInfo.setReference(reference);
+		resourceInfo.setTypeDate(typeDate);
+		resourceInfo.setReferenceCategory(category!=null?category.getReference():null);
+		return resourceInfo;
 	}
 	
 	

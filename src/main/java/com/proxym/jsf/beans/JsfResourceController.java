@@ -45,6 +45,11 @@ public class JsfResourceController {
 	/**
 	 * {@link Resource}
 	 */
+	private Resource selectedResource ;
+	
+	/**
+	 * {@link Resource}
+	 */
 	private Resource resourceToAdd = new Resource();
 	
 	/**
@@ -59,6 +64,33 @@ public class JsfResourceController {
 		LOGGER.debug("retieving all the resources existing in the system ");
 		return resourceService.findAll();
 	}
+	
+	/**
+	 * add new resource .
+	 * @throws GestionResourceException indicates there is problem.
+	 */
+	public void addResource () throws GestionResourceException {
+		
+		LOGGER.debug("add new resource ");
+		if(resourceToAdd!=null && resourceToAdd.getCategory()!=null) {
+			resourceService.addResource(resourceToAdd.toBusiness());
+			
+		}
+	}
+	
+	/**
+	 * 
+	 * @throws GestionResourceException
+	 */
+	public void deleteResource () throws GestionResourceException {
+		LOGGER.debug("add new resource ");
+		if(selectedResource!=null){
+			resourceService.deleteResource(selectedResource.getReference());
+			selectedResource=new Resource();
+		}
+		
+	}
+	
 
 	/**
 	 * 
@@ -90,6 +122,22 @@ public class JsfResourceController {
 	 */
 	public void setResourceToAdd(Resource resourceToAdd) {
 		this.resourceToAdd = resourceToAdd;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Resource getSelectedResource() {
+		return selectedResource;
+	}
+
+	/**
+	 * 
+	 * @param selectedResource
+	 */
+	public void setSelectedResource(Resource selectedResource) {
+		this.selectedResource = selectedResource;
 	}
 	
 	

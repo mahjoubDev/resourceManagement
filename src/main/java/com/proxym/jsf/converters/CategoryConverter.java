@@ -5,6 +5,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,16 +17,17 @@ import com.proxym.repositories.CategorieRepository;
 @Scope("view")
 public class CategoryConverter implements Converter {
 	
-	private CategorieRepository CategorieRepository;
+	@Autowired
+	private CategorieRepository categorieRepository;
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String id) {
-		return CategorieRepository.findOne(Long.valueOf(id));
+		return categorieRepository.findOne(Long.valueOf(id));
 	}
 
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
-		return ((Categorie)value).getId().toString();
+		return value!=null ? ((Categorie)value).getId().toString(): null;
 	}
 
 }

@@ -58,12 +58,12 @@
 
 						<p:column headerText="Supprimer ">
 
-							<p:commandLink onclick="PF('categoryDelete').show()"
-								title="supprimer" update=":formDelCat"
-								actionListener="#{jsfCategoryController.setSelectedCategory(cat)}">
+							<p:commandLink onclick="PF('resourceDelete').show()"
+								title="supprimer" update=":formDelRes"
+								actionListener="#{jsfResourceController.setSelectedResource(res)}">
 								<f:setPropertyActionListener
-									value="#{jsfCategoryController.selectedCategory}"
-									target="#{cat}" />
+									value="#{jsfResourceController.selectedResource}"
+									target="#{res}" />
 								<p:graphicImage value="../img/delete.jpg" height=" 35"
 									width="50" />
 							</p:commandLink>
@@ -81,31 +81,36 @@
 					<h:form id="formZoneModif">
 						<h:panelGrid columns="4" style="text-align:center;" layout="block">
 
-							<h:outputText value="Refrence  : " />
-							<p:inputText
-								value="#{jsfResourceController.resourceToAdd.nameCategorie}" />
-
-
 							<h:outputText value="Nom  : " />
+							<p:inputText
+								value="#{jsfResourceController.resourceToAdd.name}" />
+
+
+							<h:outputText value="Reference  : " />
 							<p:inputText
 								value="#{jsfResourceController.resourceToAdd.reference}" />
 
 
 							<h:outputText value="description : " />
 							<p:inputText
-								value="#{jsfResourceController.resourceToAdd.nameCategorie}" />
+								value="#{jsfResourceController.resourceToAdd.description}" />
 
 							<h:outputText value="Type date: " />
-							<p:inputText
-								value="#{jsfResourceController.resourceToAdd.reference}" />
+								<p:selectOneMenu value="#{jsfResourceController.resourceToAdd.typeDate}">
+						<f:selectItem itemLabel="Selecter type date" itemValue="" />
+						<f:selectItem itemLabel="Heure" itemValue="HOUR" />
+						<f:selectItem itemLabel="Jour" itemValue="DAY" />
+						<f:selectItem itemLabel="Semaine" itemValue="WEEK" />
+					</p:selectOneMenu>
 
 
 							<h:outputText value="Duree max : " />
 							<p:inputText
-								value="#{jsfResourceController.resourceToAdd.nameCategorie}" />
+								value="#{jsfResourceController.resourceToAdd.dureeMax}" />
 
 							<h:outputText value="Categorie: " />
-							<p:selectOneMenu converter="#{categoryConverter}" value="#{jsfResourceController.resourceToAdd.category}" >
+								<p:selectOneMenu converter="#{categoryConverter}"  value="#{jsfResourceController.resourceToAdd.category}" 
+								style="width:100" required="false" > 
 								<f:selectItem itemLabel="Selecter categorie" />
 								<f:selectItems value="#{jsfCategoryController.getAllCategories()}" var="cat"
 									itemLabel="#{cat.nameCategorie}" itemValue="#{cat}"
@@ -114,7 +119,7 @@
 
 
 							<p:commandButton value="Submit"
-								action="#{jsfCategoryController.addcategory()}" ajax="false" />
+								action="#{jsfResourceController.addResource()}" ajax="false" />
 
 
 						</h:panelGrid>
@@ -154,19 +159,19 @@
 
 		<p:dialog message="Vous êtes sure de supprimer cette catégorie ?"
 			style="background:white" maximizable="true" minimizable="true"
-			header="Suppression categorie" widgetVar="categoryDelete" width="300"
+			header="Suppression categorie" widgetVar="resourceDelete" width="300"
 			height="100" showEffect="clip" hideEffect="clip">
 			<br />
-			<h:form id="formDelCat">
+			<h:form id="formDelRes">
 				<h:outputText
-					value="Vous êtes sure de supprimer la categorie #{jsfCategoryController.selectedCategory.nameCategorie} ?" />
+					value="Vous êtes sure de supprimer la categorie #{jsfResourceController.selectedResource.name} ?" />
 				<p:separator />
-				<p:commandButton value="Oui" oncomplete="categoryDelete.hide()"
-					ajax="false" action="#{jsfCategoryController.deleteCategory()}" />
+				<p:commandButton value="Oui" oncomplete="resourceDelete.hide()"
+					ajax="false" action="#{jsfResourceController.deleteResource()}" />
 				<h:outputText />
 				<h:outputText />
 				<p:commandButton id="decline" value="Non"
-					onclick="categoryDelete.hide()"
+					onclick="resourceDelete.hide()"
 					style=" left:75px; position:absolute;" />
 			</h:form>
 		</p:dialog>
