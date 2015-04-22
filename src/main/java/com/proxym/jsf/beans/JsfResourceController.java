@@ -74,6 +74,7 @@ public class JsfResourceController {
 		LOGGER.debug("add new resource ");
 		if(resourceToAdd!=null && resourceToAdd.getCategory()!=null) {
 			resourceService.addResource(resourceToAdd.toBusiness());
+			resourceToAdd=new Resource();
 			
 		}
 	}
@@ -87,6 +88,20 @@ public class JsfResourceController {
 		if(selectedResource!=null){
 			resourceService.deleteResource(selectedResource.getReference());
 			selectedResource=new Resource();
+		}
+		
+	}
+	
+	/**
+	 * Update existing resource
+	 * @throws GestionResourceException
+	 */
+	public void updateResource () throws GestionResourceException {
+		
+		LOGGER.debug("update the resource ", selectedResource);
+		if(selectedResource != null ) {
+			resourceService.updateResource(selectedResource.getReference(), selectedResource.toBusiness());
+			selectedResource = null ;
 		}
 		
 	}

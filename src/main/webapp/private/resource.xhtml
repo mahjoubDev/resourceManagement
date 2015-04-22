@@ -49,9 +49,9 @@
 						</p:column>
 
 						<p:column headerText="Modifier ">
-							<p:commandLink onclick="PF('categoryModif').show();"
-								title="Modifier" update=":formEditCategory"
-								actionListener="#{jsfCategoryController.setSelectedCategory(cat)}">
+							<p:commandLink onclick="PF('resourceModif').show();"
+								title="Modifier" update=":formEditResource"
+								actionListener="#{jsfResourceController.setSelectedResource(res)}">
 								<p:graphicImage value="../img/edit.jpg" height=" 35" width="50" />
 							</p:commandLink>
 						</p:column>
@@ -82,8 +82,7 @@
 						<h:panelGrid columns="4" style="text-align:center;" layout="block">
 
 							<h:outputText value="Nom  : " />
-							<p:inputText
-								value="#{jsfResourceController.resourceToAdd.name}" />
+							<p:inputText value="#{jsfResourceController.resourceToAdd.name}" />
 
 
 							<h:outputText value="Reference  : " />
@@ -96,12 +95,13 @@
 								value="#{jsfResourceController.resourceToAdd.description}" />
 
 							<h:outputText value="Type date: " />
-								<p:selectOneMenu value="#{jsfResourceController.resourceToAdd.typeDate}">
-						<f:selectItem itemLabel="Selecter type date" itemValue="" />
-						<f:selectItem itemLabel="Heure" itemValue="HOUR" />
-						<f:selectItem itemLabel="Jour" itemValue="DAY" />
-						<f:selectItem itemLabel="Semaine" itemValue="WEEK" />
-					</p:selectOneMenu>
+							<p:selectOneMenu
+								value="#{jsfResourceController.resourceToAdd.typeDate}">
+								<f:selectItem itemLabel="Selecter type date" itemValue="" />
+								<f:selectItem itemLabel="Heure" itemValue="HOUR" />
+								<f:selectItem itemLabel="Jour" itemValue="DAY" />
+								<f:selectItem itemLabel="Semaine" itemValue="WEEK" />
+							</p:selectOneMenu>
 
 
 							<h:outputText value="Duree max : " />
@@ -109,12 +109,13 @@
 								value="#{jsfResourceController.resourceToAdd.dureeMax}" />
 
 							<h:outputText value="Categorie: " />
-								<p:selectOneMenu converter="#{categoryConverter}"  value="#{jsfResourceController.resourceToAdd.category}" 
-								style="width:100" required="false" > 
-								<f:selectItem itemLabel="Selecter categorie" />
-								<f:selectItems value="#{jsfCategoryController.getAllCategories()}" var="cat"
-									itemLabel="#{cat.nameCategorie}" itemValue="#{cat}"
-								 />
+							<p:selectOneMenu converter="#{categoryConverter}"
+								value="#{jsfResourceController.resourceToAdd.category}"
+								style="width:100" required="false">
+								<f:selectItem itemLabel="Selected categorie" />
+								<f:selectItems
+									value="#{jsfCategoryController.getAllCategories()}" var="cat"
+									itemLabel="#{cat.nameCategorie}" itemValue="#{cat}" />
 							</p:selectOneMenu>
 
 
@@ -130,25 +131,52 @@
 
 
 
-		<p:dialog header="Modifier categorie" widgetVar="categoryModif"
+		<p:dialog header="Modifier resource" widgetVar="resourceModif"
 			appendToBody="true" dynamic="true" showEffect="fade"
-			hideEffect="fade" id="dialogCategoryModif" appendTo="@(body)">
-			<h:form id="formEditCategory">
+			hideEffect="fade" id="dialogResourceModif" appendTo="@(body)">
+			<h:form id="formEditResource">
 				<h:panelGrid columns="2" style="text-align:center;" layout="block">
 
-					<h:outputText value="Reférence categorie " />
-					<h:inputText
-						value="#{jsfCategoryController.selectedCategory.reference}"
-						disabled="true" />
+					<h:outputText value="Nom  : " />
+					<p:inputText value="#{jsfResourceController.selectedResource.name}" />
 
-					<h:outputText value="nom categorie " />
-					<h:inputText
-						value="#{jsfCategoryController.selectedCategory.nameCategorie}" />
+
+					<h:outputText value="Reference  : " />
+					<p:inputText
+						value="#{jsfResourceController.selectedResource.reference}" />
+
+
+					<h:outputText value="description : " />
+					<p:inputText
+						value="#{jsfResourceController.selectedResource.description}" />
+
+					<h:outputText value="Type date: " />
+					<p:selectOneMenu
+						value="#{jsfResourceController.selectedResource.typeDate}">
+						<f:selectItem itemLabel="Selecter type date" itemValue="" />
+						<f:selectItem itemLabel="Heure" itemValue="HOUR" />
+						<f:selectItem itemLabel="Jour" itemValue="DAY" />
+						<f:selectItem itemLabel="Semaine" itemValue="WEEK" />
+					</p:selectOneMenu>
+
+
+					<h:outputText value="Duree max : " />
+					<p:inputText
+						value="#{jsfResourceController.selectedResource.dureeMax}" />
+
+					<h:outputText value="Categorie: " />
+					<p:selectOneMenu converter="#{categoryConverter}"
+						value="#{jsfResourceController.selectedResource.category}"
+						style="width:100" required="false">
+						<f:selectItem itemLabel="Selected categorie" />
+						<f:selectItems value="#{jsfCategoryController.getAllCategories()}"
+							var="cat" itemLabel="#{cat.nameCategorie}" itemValue="#{cat}" />
+					</p:selectOneMenu>
 
 
 					<p:commandButton value="Submit"
-						action="#{jsfCategoryController.updateCategory()}" ajax="false"
-						oncomplete="categoryModif.hide()" />
+						action="#{jsfResourceController.updateResource()}" ajax="false"
+						oncomplete="resourceModif.hide()" />
 
 
 				</h:panelGrid>
@@ -164,7 +192,7 @@
 			<br />
 			<h:form id="formDelRes">
 				<h:outputText
-					value="Vous êtes sure de supprimer la categorie #{jsfResourceController.selectedResource.name} ?" />
+					value="Vous êtes sure de supprimer la resource #{jsfResourceController.selectedResource.name} ?" />
 				<p:separator />
 				<p:commandButton value="Oui" oncomplete="resourceDelete.hide()"
 					ajax="false" action="#{jsfResourceController.deleteResource()}" />

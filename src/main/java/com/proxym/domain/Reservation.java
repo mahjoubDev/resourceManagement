@@ -10,9 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.proxym.business.ReservationInfo;
+import com.proxym.business.ResourceInfo;
 
 /** Reservation  object is a representation of Reservations data.
  * 
@@ -61,7 +65,7 @@ public class Reservation implements Serializable {
 	/**
 	 * List of resources related to this reservation.
 	 */
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "resourceId", nullable = false)
 	private Resource resource ;
 
@@ -216,6 +220,19 @@ public class Reservation implements Serializable {
 	public void setResource(Resource resource) {
 		this.resource = resource;
 	}
-
 	
+	/**
+	 * get business object from domain one.
+	 * @return
+	 */
+	public ReservationInfo toBusiness (){
+		
+		ReservationInfo resourceInfo =new ReservationInfo	();
+		resourceInfo.setDateEnd(dateEnd);
+		resourceInfo.setDateStart(dateStart);
+		resourceInfo.setReference(reference);
+		resourceInfo.setDescription(description);
+		resourceInfo.setReferenceResource(this.resource!=null ?this.resource.getReference():null);
+		return resourceInfo;
+}
 }
