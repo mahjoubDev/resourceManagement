@@ -49,7 +49,7 @@ public class Categorie implements Serializable {
 	/**
 	 * List of resources related to this category.
 	 */
-	@OneToMany(mappedBy = "category",cascade=CascadeType.MERGE,fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "category",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private Set<Resource> resources = new HashSet<Resource>(0);
 
 	/**
@@ -158,7 +158,6 @@ public class Categorie implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nameCategorie == null) ? 0 : nameCategorie.hashCode());
 		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
-		result = prime * result + ((resources == null) ? 0 : resources.hashCode());
 		return result;
 	}
 
@@ -185,11 +184,6 @@ public class Categorie implements Serializable {
 			if (other.reference != null)
 				return false;
 		} else if (!reference.equals(other.reference))
-			return false;
-		if (resources == null) {
-			if (other.resources != null)
-				return false;
-		} else if (!resources.equals(other.resources))
 			return false;
 		return true;
 	}

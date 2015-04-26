@@ -98,17 +98,17 @@
 								value="#{jsfReservationController.reservationToAdd.description}" />
 
 							<h:outputText value="Resource : " />
-							<p:selectOneMenu converter="#{resourceConverter}" requiredMessage="la resource est obligatoire"
+							<p:selectOneMenu converter="#{resourceConverter}" 
 								value="#{jsfReservationController.reservationToAdd.resource}"
 								style="width:100" required="false">
 								<f:selectItem itemLabel="choisi resource" />
 								<f:selectItems 
-									value="#{jsfResourceController.getAllResources()}" var="res"
+									value="#{jsfResourceController.allResource}" var="res"
 									itemLabel="#{res.name}" itemValue="#{res}" />
 							</p:selectOneMenu>
 
 							<p:commandButton value="Submit"
-								action="#{jsfReservationController.addreserveegory()}"
+								action="#{jsfReservationController.addReservation()}"
 								ajax="false" />
 
 

@@ -66,7 +66,7 @@ public class Reservation implements Serializable {
 	 * List of resources related to this reservation.
 	 */
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "resourceId", nullable = false)
+	@JoinColumn(name = "resource", nullable = false)
 	private Resource resource ;
 
 	/**
@@ -233,6 +233,71 @@ public class Reservation implements Serializable {
 		resourceInfo.setReference(reference);
 		resourceInfo.setDescription(description);
 		resourceInfo.setReferenceResource(this.resource!=null ?this.resource.getReference():null);
+		setResource(null);
 		return resourceInfo;
 }
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((dateEnd == null) ? 0 : dateEnd.hashCode());
+		result = prime * result + ((dateStart == null) ? 0 : dateStart.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((loginUser == null) ? 0 : loginUser.hashCode());
+		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
+		result = prime * result + ((resource == null) ? 0 : resource.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Reservation other = (Reservation) obj;
+		if (dateEnd == null) {
+			if (other.dateEnd != null)
+				return false;
+		} else if (!dateEnd.equals(other.dateEnd))
+			return false;
+		if (dateStart == null) {
+			if (other.dateStart != null)
+				return false;
+		} else if (!dateStart.equals(other.dateStart))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (loginUser == null) {
+			if (other.loginUser != null)
+				return false;
+		} else if (!loginUser.equals(other.loginUser))
+			return false;
+		if (reference == null) {
+			if (other.reference != null)
+				return false;
+		} else if (!reference.equals(other.reference))
+			return false;
+		if (resource == null) {
+			if (other.resource != null)
+				return false;
+		} else if (!resource.equals(other.resource))
+			return false;
+		return true;
+	}
+	
+	
+	
 }

@@ -23,6 +23,23 @@
 
 
 	<dependencies>
+	
+	<dependency>
+
+
+      <groupId>org.jboss.portletbridge</groupId>
+      <artifactId>portletbridge-api</artifactId>
+      <version>3.1.2.Final</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.portletbridge</groupId>
+      <artifactId>portletbridge-impl</artifactId>
+      <version>3.1.2.Final</version>
+      <scope>runtime</scope>
+    </dependency>
+	
+	
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
@@ -174,13 +191,6 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>exo</groupId>
-			<artifactId>exoplatform.services.portlet-container.impl</artifactId>
-			<version>1.0</version>
-			<scope>provided</scope>
-		</dependency>
-
 
 
 	</dependencies>
@@ -191,7 +201,30 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+	
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+			
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+			
 		</plugins>
+		
+		
+		
 	</build>
 
 </project>

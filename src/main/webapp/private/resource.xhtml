@@ -23,7 +23,7 @@
 				style="margin-bottom:20px">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:dataTable var="res"
-						value="#{jsfResourceController.getAllResources()}">
+						value="#{jsfResourceController.allResource}">
 						<p:column headerText="Reference resource">
 							<h:outputText value="#{res.reference}" />
 						</p:column>
@@ -52,6 +52,9 @@
 							<p:commandLink onclick="PF('resourceModif').show();"
 								title="Modifier" update=":formEditResource"
 								actionListener="#{jsfResourceController.setSelectedResource(res)}">
+								<f:setPropertyActionListener
+									value="#{jsfResourceController.selectedResource}"
+									target="#{res}" />
 								<p:graphicImage value="../img/edit.jpg" height=" 35" width="50" />
 							</p:commandLink>
 						</p:column>
@@ -73,12 +76,12 @@
 				</h:panelGrid>
 			</p:fieldset>
 
-			<p:fieldset legend="Ajout categorie" toggleable="true"
+			<p:fieldset legend="Ajout Resource" toggleable="true"
 				toggleSpeed="500">
 				<p:ajax event="toggle" listener="#{fieldsetView.handleToggle}"
 					update="msgs" />
 				<h:panelGrid columns="2" cellpadding="5" cellspacing="10">
-					<h:form id="formZoneModif">
+					<h:form id="formZoneModifddd">
 						<h:panelGrid columns="4" style="text-align:center;" layout="block">
 
 							<h:outputText value="Nom  : " />
@@ -133,7 +136,7 @@
 
 		<p:dialog header="Modifier resource" widgetVar="resourceModif"
 			appendToBody="true" dynamic="true" showEffect="fade"
-			hideEffect="fade" id="dialogResourceModif" appendTo="@(body)">
+			hideEffect="fade" id="dialogResourceModif" >
 			<h:form id="formEditResource">
 				<h:panelGrid columns="2" style="text-align:center;" layout="block">
 

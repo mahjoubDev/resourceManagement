@@ -22,7 +22,14 @@ public class CategoryConverter implements Converter {
 
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String id) {
-		return categorieRepository.findOne(Long.valueOf(id));
+		Long idparsed=null;
+		boolean parsed=true;
+		try {
+			idparsed=Long.valueOf(id);
+		}catch(Exception exception){
+			parsed=false;
+		}
+		return parsed?categorieRepository.findOne(idparsed):null;
 	}
 
 	@Override

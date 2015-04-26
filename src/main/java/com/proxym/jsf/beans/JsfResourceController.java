@@ -52,18 +52,20 @@ public class JsfResourceController {
 	 */
 	private Resource resourceToAdd = new Resource();
 	
-	/**
-	 * Gets all the resources.
-	 * 
-	 * @return A <code>Collection</code> containing all the resources.
-	 * 
-	 * @throws GestionResourceException indicates there's problem.
-	 */
-	public List<Resource> getAllResources () throws GestionResourceException {
-		
-		LOGGER.debug("retieving all the resources existing in the system ");
-		return resourceService.findAll();
-	}
+	private List<Resource> allResource;
+	
+//	/**
+//	 * Gets all the resources.
+//	 * 
+//	 * @return A <code>Collection</code> containing all the resources.
+//	 * 
+//	 * @throws GestionResourceException indicates there's problem.
+//	 */
+//	public List<Resource> getAllResources () throws GestionResourceException {
+//		
+//		LOGGER.debug("retieving all the resources existing in the system ");
+//		return resourceService.findAll();
+//	}
 	
 	/**
 	 * add new resource .
@@ -154,6 +156,18 @@ public class JsfResourceController {
 	public void setSelectedResource(Resource selectedResource) {
 		this.selectedResource = selectedResource;
 	}
+
+	
+	public List<Resource> getAllResource() throws GestionResourceException {
+		LOGGER.debug("retieving all the resources existing in the system ");
+		return resourceService.findAll();
+	}
+
+	
+	public void setAllResource(List<Resource> allResource) {
+		this.allResource = allResource;
+	}
+	
 	
 	
 	
