@@ -10,7 +10,7 @@
 
     <portlet>
 
-        <portlet-name>jsf2portlet</portlet-name>
+        <portlet-name>GestionRservationportlet</portlet-name>
 
         <portlet-class>javax.portlet.faces.GenericFacesPortlet</portlet-class>
 
