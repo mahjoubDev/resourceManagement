@@ -12,6 +12,8 @@ import com.proxym.business.CategorieInfo;
 import com.proxym.domain.Categorie;
 import com.proxym.exception.GestionResourceException;
 import com.proxym.service.CategorieService;
+import com.proxym.service.UserService;
+import org.exoplatform.services.organization.User;
 
 /**
  * Backed bean for managing the categories
@@ -35,6 +37,12 @@ public class JsfCategoryController {
 	 */
 	@Autowired
 	private CategorieService categorieService;
+	
+	/**
+	 * user service
+	 */
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * object used to hold the category fields.
@@ -89,6 +97,20 @@ public class JsfCategoryController {
 		if(selectedCategory != null ) {
 			categorieService.updateCategory(selectedCategory.getReference(), selectedCategory.toBusiness());
 			selectedCategory = null ;
+		}
+	}
+	
+	public String  showUser() throws Exception {
+		User user =userService.getUserCurrent();
+		if(user != null) {
+			String result =user.getFirstName() +' '+user.getLastName()+"  "+user.getEmail()+"   "+user.getUserName();
+			System.out.println("*********************** the current user is "+ user.getFirstName() +' '+user.getLastName()+"  "+user.getEmail()+"   "+user.getUserName());
+			return result;
+		}
+		else {
+			System.out.println("*********************** the current user is nothing ");
+			return "no user";
+
 		}
 	}
 

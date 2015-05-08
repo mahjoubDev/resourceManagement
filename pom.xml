@@ -22,21 +22,74 @@
 
 
 
+	<repositories>
+
+		<repository>
+			<id>repository.jboss.org</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+
+		<!-- <repository> -->
+		<!-- <releases /> -->
+		<!-- <id>maven-repository.dev.java.net</id> -->
+		<!-- <name>Java.net Repository for Maven</name> -->
+		<!-- <url>https://maven-repository.dev.java.net/nonav/repository</url> -->
+		<!-- </repository> -->
+
+		<repository>
+			<id>exo-public</id>
+			<url>http://repository.exoplatform.org/public</url>
+		</repository>
+
+		<repository>
+			<id>central</id>
+			<url>https://repo1.maven.org/maven2</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+		</repository>
+
+	</repositories>
+
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>codehaus.org</id>
+			<name>CodeHaus Plugin Snapshots</name>
+			<url>http://snapshots.repository.codehaus.org</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+
+
+
 	<dependencies>
 
 		<dependency>
-	<groupId>org.jboss.portletbridge</groupId>
-	<artifactId>portletbridge-api</artifactId>
-	<version>3.3.0.Beta2</version>
-</dependency>
+			<groupId>org.jboss.portletbridge</groupId>
+			<artifactId>portletbridge-api</artifactId>
+			<version>3.3.0.Beta2</version>
+		</dependency>
 
 
 		<dependency>
-	<groupId>org.jboss.portletbridge</groupId>
-	<artifactId>portletbridge-impl</artifactId>
-	<version>3.3.0.Beta2</version>
-	<scope>runtime</scope>
-</dependency>
+			<groupId>org.jboss.portletbridge</groupId>
+			<artifactId>portletbridge-impl</artifactId>
+			<version>3.3.0.Beta2</version>
+			<scope>runtime</scope>
+		</dependency>
 
 
 		<dependency>
@@ -190,11 +243,44 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>org.exoplatform.social</groupId>
+			<artifactId>exo.social.component.core</artifactId>
+			<version>1.2.6</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.exoplatform.ecms</groupId>
+			<artifactId>exo-ecms-core-publication</artifactId>
+			<version>2.3.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.exoplatform.ecms</groupId>
+			<artifactId>exo-ecms-core-services</artifactId>
+			<version>2.3.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.exoplatform.ecms</groupId>
+			<artifactId>exo-ecms-core-webui</artifactId>
+			<version>2.3.4</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.exoplatform.social</groupId>
+			<artifactId>exo.social.component.core</artifactId>
+			<version>1.2.6</version>
+			<scope>provided</scope>
+		</dependency>
+
 
 	</dependencies>
 
 	<build>
-	 <finalName>GestionResource</finalName>
+		<finalName>GestionResource</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
